@@ -1,0 +1,129 @@
+Q1 . Create a table with suitable constraints and fill the table with following dataset.
+mysql> select *from teachers_details;
++------------+--------------+--------+------------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department       | salary | date_of_joining |
++------------+--------------+--------+------------------+--------+-----------------+
+|        101 | rasmika      | female | computer_science |  15000 | 2001-02-12      |
+|        102 | harish       | male   | History          |  13000 | 2000-03-11      |
+|        103 | john         | male   | History          |  14000 | 2002-01-15      |
+|        104 | Sakthivel    | male   | Computer_science |  14000 | 2002-01-15      |
+|        105 | samantha     | female | Biology          |   9000 | 2001-08-19      |
+|        106 | ishu         | female | Biology          |   8000 | 2000-01-20      |
+|        107 | adhi         | male   | Bio-maths        |   7000 | 2002-03-11      |
+|        108 | nila         | female | Computer_science |  10000 | 2001-01-12      |
++------------+--------------+--------+------------------+--------+-----------------+
+8 rows in set (0.01 sec)
+
+Q2. Write an SQL Query to select all the information of teachers in computer department.
+
+mysql> select *from teachers_details where department = 'computer_science';
++------------+--------------+--------+------------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department       | salary | date_of_joining |
++------------+--------------+--------+------------------+--------+-----------------+
+|        101 | rasmika      | female | computer_science |  15000 | 2001-02-12      |
+|        104 | Sakthivel    | male   | Computer_science |  14000 | 2002-01-15      |
+|        108 | nila         | female | Computer_science |  10000 | 2001-01-12      |
++------------+--------------+--------+------------------+--------+-----------------+
+3 rows in set (0.01 sec)
+
+Q3. Write a query to list the name of female teachers in History department.
+
+mysql> select *from teachers_details where department = 'computer_science' and gender = 'female';
++------------+--------------+--------+------------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department       | salary | date_of_joining |
++------------+--------------+--------+------------------+--------+-----------------+
+|        101 | rasmika      | female | computer_science |  15000 | 2001-02-12      |
+|        108 | nila         | female | Computer_science |  10000 | 2001-01-12      |
++------------+--------------+--------+------------------+--------+-----------------+
+2 rows in set (0.00 sec)
+
+Q4. list all names of teachers with date of admission in ascending order
+
+mysql> select teacher_name,date_of_joining from teachers_details order by date_of_joining asc;
++--------------+-----------------+
+| teacher_name | date_of_joining |
++--------------+-----------------+
+| ishu         | 2000-01-20      |
+| harish       | 2000-03-11      |
+| nila         | 2001-01-12      |
+| rasmika      | 2001-02-12      |
+| samantha     | 2001-08-19      |
+| john         | 2002-01-15      |
+| Sakthivel    | 2002-01-15      |
+| adhi         | 2002-03-11      |
++--------------+-----------------+
+8 rows in set (0.00 sec)
+
+Q5. display Teacher’s name, Department, and Salary of male teacher.
+
+mysql> select teacher_name,department,salary from teachers_details where gender = 'male';
++--------------+------------------+--------+
+| teacher_name | department       | salary |
++--------------+------------------+--------+
+| harish       | History          |  13000 |
+| john         | History          |  14000 |
+| Sakthivel    | Computer_science |  14000 |
+| adhi         | Bio-maths        |   7000 |
++--------------+------------------+--------+
+4 rows in set (0.00 sec)
+
+Q6. To count the number of items whose salary is less than 10,000
+
+mysql> select count(*) from teachers_details where salary <10000;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.01 sec)
+
+Q7.  To insert a new record in the Teacher table with the following data: 8,”Mersha”,”computer”,{1/1/2000},12000,”m”
+
+mysql> insert into teachers_details(teacher_id,teacher_name,gender,department,salary,date_of_joining) values (108,'Mersha','Male','Computer_science',12000,'2000-01-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from teachers_details;
++------------+--------------+--------+------------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department       | salary | date_of_joining |
++------------+--------------+--------+------------------+--------+-----------------+
+|        101 | rasmika      | female | computer_science |  15000 | 2001-02-12      |
+|        102 | harish       | male   | History          |  13000 | 2000-03-11      |
+|        103 | john         | male   | History          |  14000 | 2002-01-15      |
+|        104 | Sakthivel    | male   | Computer_science |  14000 | 2002-01-15      |
+|        105 | samantha     | female | Biology          |   9000 | 2001-08-19      |
+|        106 | ishu         | female | Biology          |   8000 | 2000-01-20      |
+|        107 | adhi         | male   | Bio-maths        |   7000 | 2002-03-11      |
+|        108 | nila         | female | Computer_science |  10000 | 2001-01-12      |
+|        108 | Mersha       | Male   | Computer_science |  12000 | 2000-01-01      |
++------------+--------------+--------+------------------+--------+-----------------+
+9 rows in set (0.00 sec)
+
+Q8. List the teacher detail who is getting the minimum salary.
+
+mysql> select *from teachers_details where salary = (select min(salary) from teachers_details);
++------------+--------------+--------+------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department | salary | date_of_joining |
++------------+--------------+--------+------------+--------+-----------------+
+|        107 | adhi         | male   | Bio-maths  |   7000 | 2002-03-11      |
++------------+--------------+--------+------------+--------+-----------------+
+1 row in set (0.00 sec)
+
+Q9.  List the teacher detail who is getting the second minimum salary.
+
+mysql> select* from teachers_details s where 2 = (select count(salary) from teachers_details where salary <=s.salary);
++------------+--------------+--------+------------+--------+-----------------+
+| teacher_id | teacher_name | gender | department | salary | date_of_joining |
++------------+--------------+--------+------------+--------+-----------------+
+|        106 | ishu         | female | Biology    |   8000 | 2000-01-20      |
++------------+--------------+--------+------------+--------+-----------------+
+1 row in set (0.00 sec)
+
+Q10. List down the average salary of the teachers belongs to History department  
+
+mysql> select avg(salary) from teachers_details where department = 'history';
++-------------+
+| avg(salary) |
++-------------+
+|       13500 |
++-------------+
+1 row in set (0.00 sec)

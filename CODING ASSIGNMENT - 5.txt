@@ -1,0 +1,51 @@
+1) Consider the following relations for a boat management application for a beach resort:
+
+Insert records into the above tables.
+mysql> select *from sailor;
++-----+---------+------------+--------+
+| sid | name    | dob        | gender |
++-----+---------+------------+--------+
+| A   | prakesh | 2001-09-01 | male   |
+| B   | ishu    | 2002-08-20 | female |
+| C   | sabari  | 2001-10-18 | male   |
+| D   | sarun   | 2002-01-10 | male   |
++-----+---------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create table boat(bid char primary key,btype varchar(20)check(btype='d' or btype='s'),bname varchar(20) unique key,color varchar(20));
+Query OK, 0 rows affected (0.04 sec)
+mysql> select *from boat;
++-----+-------+--------------+--------+
+| bid | btype | bname        | color  |
++-----+-------+--------------+--------+
+| A   | D     | deluxe       | red    |
+| B   | S     | super_deluxe | yellow |
+| C   | S     | taitanic     | black  |
+| D   | D     | sketch       | white  |
++-----+-------+--------------+--------+
+4 rows in set (0.00 sec)
+
+
+mysql> create table sails(sid char,bid char,dot date,shift varchar(5),foreign key(sid) references sailor(sid), foreign key(bid) references boat(bid));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc sails;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| sid   | char(1)    | YES  | MUL | NULL    |       |
+| bid   | char(1)    | YES  | MUL | NULL    |       |
+| dot   | date       | YES  |     | NULL    |       |
+| shift | varchar(5) | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+mysql> select *from sails;
++------+------+------------+-------+
+| sid  | bid  | dot        | shift |
++------+------+------------+-------+
+| A    | A    | 2019-03-13 | FN    |
+| B    | B    | 2020-05-29 | AN    |
+| C    | C    | 2019-03-30 | FN    |
+| D    | D    | 2020-02-10 | AN    |
++------+------+------------+-------+
+4 rows in set (0.00 sec)

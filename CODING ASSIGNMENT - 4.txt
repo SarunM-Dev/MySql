@@ -1,0 +1,228 @@
+1. Display the total number of employees working in the company?
+
+mysql> select count(*) from details;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.01 sec)
+
+2.Display the total salary and total commission to all employees?
+
+mysql> select sum(salary) as total_salary , sum(total_commission) as totally_commission from details;
++--------------+--------------------+
+| total_salary | totally_commission |
++--------------+--------------------+
+|        40000 |               4000 |
++--------------+--------------------+
+1 row in set (0.00 sec)
+
+3.Display the maximum salary from emp table.?
+
+mysql> select max(salary) as employee_name from details;
++---------------+
+| employee_name |
++---------------+
+|          8000 |
++---------------+
+1 row in set (0.01 sec)
+
+4.Display the hiredate of junior most employee.?
+
+mysql> select min(join_date) as junior from details;
++------------+
+| junior     |
++------------+
+| 1980-07-31 |
++------------+
+1 row in set (0.00 sec)
+
+5.Display the average salary from emp table.?
+
+mysql> select avg(salary) as avg from details;
++-------------------+
+| avg               |
++-------------------+
+| 4444.444444444444 |
++-------------------+
+1 row in set (0.00 sec)
+
+6.Display the maximum salary being paid to CLERK.
+
+mysql> select max(salary) , jobrole from details group by jobrole having jobrole ='clerk';
++-------------+---------+
+| max(salary) | jobrole |
++-------------+---------+
+|        5000 | clerk   |
++-------------+---------+
+1 row in set (0.00 sec)
+
+7.Display the maximum salary being paid in dept no 20.?
+
+mysql> select max(salary) as max_salary from details where depart_no = 20;
++------------+
+| max_salary |
++------------+
+|       5000 |
++------------+
+1 row in set (0.00 sec)
+
+8.Display the minimum salary being paid to any SALESMAN.?
+
+mysql> select min(salary) as min_salary from details where jobrole = 'salesman';
++------------+
+| min_salary |
++------------+
+|       3000 |
++------------+
+1 row in set (0.00 sec)
+
+9.Display the average salary drawn by managers.?
+
+mysql> select avg(salary) as avgmanager_salary from details where jobrole = 'manager';
++-------------------+
+| avgmanager_salary |
++-------------------+
+|              8000 |
++-------------------+
+1 row in set (0.00 sec)
+
+10.Display the total salary drawn by analyst working in dept no 20.?
+
+mysql> select sum(salary) as totalanalyst_salary from details where depart_no = 20 or jobrole = 'analyst';
++---------------------+
+| totalanalyst_salary |
++---------------------+
+|               20000 |
++---------------------+
+1 row in set (0.00 sec)
+
+11. Display Department numbers and total number of employees working in each Department?
+
+mysql> select jobrole, count(*) as total_employee from details group by jobrole;
++----------+----------------+
+| jobrole  | total_employee |
++----------+----------------+
+| salesman |              2 |
+| clerk    |              2 |
+| analyst  |              4 |
+| manager  |              1 |
++----------+----------------+
+4 rows in set (0.00 sec)
+
+12. Display the various jobs and total number of employees working in each job group?
+
+mysql> select depart_no, count(*) as total_employee from details group by depart_no;
++-----------+----------------+
+| depart_no | total_employee |
++-----------+----------------+
+|        10 |              1 |
+|        20 |              1 |
+|        30 |              1 |
+|        40 |              1 |
+|        50 |              1 |
+|        60 |              1 |
+|        70 |              1 |
+|        80 |              1 |
+|        90 |              1 |
++-----------+----------------+
+9 rows in set (0.00 sec)
+
+13.Display department numbers and Total Salary for each Department?
+
+mysql> select depart_no, sum(salary) as total_salary from details group by depart_no;
++-----------+--------------+
+| depart_no | total_salary |
++-----------+--------------+
+|        10 |         3000 |
+|        20 |         5000 |
+|        30 |         4000 |
+|        40 |         5000 |
+|        50 |         3000 |
+|        60 |         4000 |
+|        70 |         5000 |
+|        80 |         3000 |
+|        90 |         8000 |
++-----------+--------------+
+9 rows in set (0.00 sec)
+
+14.Display department numbers and Maximum Salary from each Department?
+
+mysql> select depart_no, max(salary) as maximum_salary from details group by depart_no;
++-----------+----------------+
+| depart_no | maximum_salary |
++-----------+----------------+
+|        10 |           3000 |
+|        20 |           5000 |
+|        30 |           4000 |
+|        40 |           5000 |
+|        50 |           3000 |
+|        60 |           4000 |
+|        70 |           5000 |
+|        80 |           3000 |
+|        90 |           8000 |
++-----------+----------------+
+9 rows in set (0.00 sec)
+
+15.Display various jobs and Total Salary for each job??
+
+mysql> select jobrole, sum(salary) as total_salary from details group by jobrole;
++----------+--------------+
+| jobrole  | total_salary |
++----------+--------------+
+| salesman |         7000 |
+| clerk    |        10000 |
+| analyst  |        15000 |
+| manager  |         8000 |
++----------+--------------+
+4 rows in set (0.00 sec)
+
+16..Display each job along with min of salary being paid in each job group?
+
+mysql> select jobrole, min(salary) as min_salary from details group by jobrole;
++----------+------------+
+| jobrole  | min_salary |
++----------+------------+
+| salesman |       3000 |
+| clerk    |       5000 |
+| analyst  |       3000 |
+| manager  |       8000 |
++----------+------------+
+4 rows in set (0.00 sec)
+
+17.Display the department Number with more than three employees in each department?
+
+mysql> select jobrole from details group by jobrole having count(*)>3;
++---------+
+| jobrole |
++---------+
+| analyst |
++---------+
+1 row in set (0.00 sec)
+
+18. Display various jobs along with total salary for each of the job where total 
+salary is greater than 2500?
+
+mysql> select jobrole,sum(salary) as total_salary from details group by jobrole having sum(salary)>3000;
++----------+--------------+
+| jobrole  | total_salary |
++----------+--------------+
+| salesman |         7000 |
+| clerk    |        10000 |
+| analyst  |        15000 |
+| manager  |         8000 |
++----------+--------------+
+4 rows in set (0.00 sec)
+
+19.Display the various jobs along with total number of employees in each job.
+The output should contain only those jobs with more than three employees?
+
+mysql> select jobrole, count(*) as total_employee from details group by jobrole having total_employee>3;
++---------+----------------+
+| jobrole | total_employee |
++---------+----------------+
+| analyst |              4 |
++---------+----------------+
+1 row in set (0.00 sec)
+

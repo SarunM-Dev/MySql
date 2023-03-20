@@ -1,0 +1,367 @@
+1. Write a MongoDB query to display at least 10 details of the documents of  book_id, Btitle, authors in array and price for 
+all the documents in the collection Bookstore. 
+
+college> db.bookMark.find();
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 1500
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38680"),
+    Book_id: 103,
+    Book_title: 'death of a city',
+    Book_authors: 'Amrita pritam',
+    Price: 1000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38681"),
+    Book_id: 104,
+    Book_title: 'a suitable boy',
+    Book_authors: 'Amrita pritam',
+    Price: 800
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38682"),
+    Book_id: 105,
+    Book_title: 'Oliver twist',
+    Book_authors: 'Charles Darwin',
+    Price: 700
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38683"),
+    Book_id: 106,
+    Book_title: 'Origin of species',
+    Book_authors: 'Charles Darwin',
+    Price: 900
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38684"),
+    Book_id: 107,
+    Book_title: 'Apple cart',
+    Book_authors: 'george bernard shaw',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38685"),
+    Book_id: 108,
+    Book_title: 'Man and superman',
+    Book_authors: 'george barnard shaw',
+    Price: 700
+  }
+]
+
+2. Write a MongoDB query to display the fields Btitle,  authors and price but exclude the bookid for all the documents in the collection Bookstore. 
+
+
+college> db.bookMark.find({},{Book_title:1,Book_autors:1,Price:1})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_title: 'A Passage to india',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_title: 'A revenue stamp',
+    Price: 1500
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38680"),
+    Book_title: 'death of a city',
+    Price: 1000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38681"),
+    Book_title: 'a suitable boy',
+    Price: 800
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38682"),
+    Book_title: 'Oliver twist',
+    Price: 700
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38683"),
+    Book_title: 'Origin of species',
+    Price: 900
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38684"),
+    Book_title: 'Apple cart',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38685"),
+    Book_title: 'Man and superman',
+    Price: 700
+  }
+]
+
+3. Write a MongoDB query to display the first 3 books based on similar authors.
+
+college> db.bookMark.find({Book_authors:{$in:["Em.foster"]}})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  }
+]
+
+4. Write a MongoDB query to find the book price more than 1500. 
+
+college> db.bookMark.find({Price:{$gt: 1500}})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38684"),
+    Book_id: 107,
+    Book_title: 'Apple cart',
+    Book_authors: 'george bernard shaw',
+    Price: 2000
+  }
+]
+
+5.Write a MongoDB query to find the book title who's price is  more than 800 but less than 2000.
+
+college> db.bookMark.find({Price:{$gt: 800, $lt:2000}})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 1500
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38680"),
+    Book_id: 103,
+    Book_title: 'death of a city',
+    Book_authors: 'Amrita pritam',
+    Price: 1000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38683"),
+    Book_id: 106,
+    Book_title: 'Origin of species',
+    Book_authors: 'Charles Darwin',
+    Price: 900
+  }
+]
+
+
+6. Write a MongoDB query to arrange the book name of the bookstore in ascending order along with all the columns. 
+
+
+college> db.bookMark.find().sort({ Book_id: 1})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 1500
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38680"),
+    Book_id: 103,
+    Book_title: 'death of a city',
+    Book_authors: 'Amrita pritam',
+    Price: 1000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38681"),
+    Book_id: 104,
+    Book_title: 'a suitable boy',
+    Book_authors: 'Amrita pritam',
+    Price: 800
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38682"),
+    Book_id: 105,
+    Book_title: 'Oliver twist',
+    Book_authors: 'Charles Darwin',
+    Price: 700
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38683"),
+    Book_id: 106,
+    Book_title: 'Origin of species',
+    Book_authors: 'Charles Darwin',
+    Price: 900
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38684"),
+    Book_id: 107,
+    Book_title: 'Apple cart',
+    Book_authors: 'george bernard shaw',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38685"),
+    Book_id: 108,
+    Book_title: 'Man and superman',
+    Book_authors: 'george barnard shaw',
+    Price: 700
+  }
+]
+
+7.Write a MongoDB query to arrange the book name of the bookstore in ascending order along with all the columns. 
+
+college> db.bookMark.find().sort({ Book_id: -1})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d38685"),
+    Book_id: 108,
+    Book_title: 'Man and superman',
+    Book_authors: 'george barnard shaw',
+    Price: 700
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38684"),
+    Book_id: 107,
+    Book_title: 'Apple cart',
+    Book_authors: 'george bernard shaw',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38683"),
+    Book_id: 106,
+    Book_title: 'Origin of species',
+    Book_authors: 'Charles Darwin',
+    Price: 900
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38682"),
+    Book_id: 105,
+    Book_title: 'Oliver twist',
+    Book_authors: 'Charles Darwin',
+    Price: 700
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38681"),
+    Book_id: 104,
+    Book_title: 'a suitable boy',
+    Book_authors: 'Amrita pritam',
+    Price: 800
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d38680"),
+    Book_id: 103,
+    Book_title: 'death of a city',
+    Book_authors: 'Amrita pritam',
+    Price: 1000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 1500
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  }
+]
+
+8. Write a MongoDB query to know whether the author in the authors list.
+
+college> db.bookMark.find({Book_authors:"Em.foster"})
+[
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867e"),
+    Book_id: 101,
+    Book_title: 'A Passage to india',
+    Book_authors: 'Em.foster',
+    Price: 2000
+  },
+  {
+    _id: ObjectId("6416a4a98d445fe405d3867f"),
+    Book_id: 102,
+    Book_title: 'A revenue stamp',
+    Book_authors: 'Em.foster',
+    Price: 1500
+  }
+]
+
+9.Write a MongoDB query to update & increase the book price Rs.500 in all book name as "MongoDB Practice".
+
+college> db.bookMark.updateMany({Book_title:"A revenue stamp"},{ $inc: {Price:500}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+college> db.bookMark.findOne({Book_title:"A revenue stamp"})
+{
+  _id: ObjectId("6416a4a98d445fe405d3867f"),
+  Book_id: 102,
+  Book_title: 'A revenue stamp',
+  Book_authors: 'Em.foster',
+  Price: 2000
+
+10. Write a MongoDB query to use Update modifiers ($set, $push,  $pull,  $setOnInsert,$upsert) in bookstore.
+
+
+college> db.bookMark.updateOne({"Book_id":107},{$set:{"Price":3000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+college> db.bookMark.updateOne({"Book_id":102},{$push:{"Book_authors":["Em.foster"]}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+
+
+

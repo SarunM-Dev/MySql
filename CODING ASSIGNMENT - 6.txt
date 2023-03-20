@@ -1,0 +1,150 @@
+1. Write a query to display the name,job.salary department name and department number for all employees.
+mysql> select emp_name,desti,dept_no,basic_pay from emp_details;
++----------+-----------+---------+-----------+
+| emp_name | desti     | dept_no | basic_pay |
++----------+-----------+---------+-----------+
+| Sanjay   | developer |      10 | 10000.000 |
+| Sarun    | manager   |      20 | 15000.000 |
+| santhosh | developer |      30 | 10000.000 |
+| sabari   | analyst   |      40 |  8000.000 |
+| samu     | analyst   |      50 |  9000.000 |
+| mahesh   | tester    |      60 |  6000.000 |
+| hari     | designer  |      70 |  9000.000 |
++----------+-----------+---------+-----------+
+7 rows in set (0.00 sec)
+
+
+2. Display the jos available in DALLAS.
+
+mysql> select * from dept_details where location = 'dallas';
++---------+-----------+----------+
+| dept_no | dept_name | location |
++---------+-----------+----------+
+|      10 | developer | dallas   |
+|      60 | tester    | dallas   |
+|      70 | tester    | dallas   |
++---------+-----------+----------+
+3 rows in set (0.00 sec)
+
+
+3.Display the name,job,salary and the salary grade for each employee.
+
+mysql> select * from emp_details inner join emp_performance on emp_details.emp_id = emp_performance.emp_id;
++--------+----------+-----------+---------+------------+-----------+--------+-----------+
+| emp_id | emp_name | desti     | dept_no | hire_date  | basic_pay | emp_id | grade     |
++--------+----------+-----------+---------+------------+-----------+--------+-----------+
+|    101 | Sanjay   | developer |      10 | 2019-10-02 | 10000.000 |    101 | good      |
+|    101 | Sanjay   | developer |      10 | 2019-10-02 | 10000.000 |    101 | very good |
+|    102 | Sarun    | manager   |      20 | 2019-08-07 | 15000.000 |    102 | very good |
+|    103 | santhosh | developer |      30 | 2019-10-07 | 10000.000 |    103 | excellent |
+|    104 | sabari   | analyst   |      40 | 2019-10-07 |  8000.000 |    104 | good      |
+|    105 | samu     | analyst   |      50 | 2019-10-07 |  9000.000 |    105 | average   |
+|    106 | mahesh   | tester    |      60 | 2019-12-04 |  6000.000 |    106 | poor      |
+|    107 | hari     | designer  |      70 | 2019-12-04 |  9000.000 |    107 | good      |
++--------+----------+-----------+---------+------------+-----------+--------+-----------+
+8 rows in set (0.00 sec)
+
+4. Display the dept name and no. of employees working in each dept.
+
+mysql> select dept_name, count(*) as num_employees from dept_details group by dept_name;
++-----------+---------------+
+| dept_name | num_employees |
++-----------+---------------+
+| developer |             2 |
+| manager   |             1 |
+| analyst   |             2 |
+| tester    |             2 |
++-----------+---------------+
+4 rows in set (0.01 sec)
+
+5.Display the empno,name,dept name,loc,grade of all employees.?
+
+mysql> select e.emp_id,emp_name,e.desti,g.grade from emp_details e inner join emp_performance g on e.emp_id = g.emp_id;
++--------+----------+-----------+-----------+
+| emp_id | emp_name | desti     | grade     |
++--------+----------+-----------+-----------+
+|    101 | Sanjay   | developer | good      |
+|    101 | Sanjay   | developer | very good |
+|    102 | Sarun    | manager   | very good |
+|    103 | santhosh | developer | excellent |
+|    104 | sabari   | analyst   | good      |
+|    105 | samu     | analyst   | average   |
+|    106 | mahesh   | tester    | poor      |
+|    107 | hari     | designer  | good      |
++--------+----------+-----------+-----------+
+8 rows in set (0.00 sec)
+
+6.Display the empno,name,deptno and the dept name for all employees. Include the depts which is not having any employees.
+
+mysql> select e.emp_id,e.emp_name,e.desti,e.dept_no from emp_details e left join dept_details d on e.emp_id = d.dept_no order by e.dept_no;
++--------+----------+-----------+---------+
+| emp_id | emp_name | desti     | dept_no |
++--------+----------+-----------+---------+
+|    101 | Sanjay   | developer |      10 |
+|    102 | Sarun    | manager   |      20 |
+|    103 | santhosh | developer |      30 |
+|    104 | sabari   | analyst   |      40 |
+|    105 | samu     | analyst   |      50 |
+|    106 | mahesh   | tester    |      60 |
+|    107 | hari     | designer  |      70 |
++--------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+7.Display the deptno and dept name which is having no. employees.
+
+
+mysql> select e.desti,e.dept_no from emp_details e left join dept_details d on e.dept_no = d.dept_no where e.emp_name = 'null';
++----------+---------+
+| desti    | dept_no |
++----------+---------+
+| designer |      80 |
+| analyst  |      90 |
++----------+---------+
+2 rows in set (0.00 sec)
+
+8.Display the employee name and their manager's name for all employees.
+
+mysql> select emp_name,manager from emp_details ;
++----------+---------+
+| emp_name | manager |
++----------+---------+
+| Sanjay   | Sarun   |
+| Sarun    | Sarun   |
+| santhosh | Sarun   |
+| sabari   | Sarun   |
+| samu     | Sarun   |
+| mahesh   | Sarun   |
+| hari     | Sarun   |
+| null     | Sarun   |
+| null     | Sarun   |
++----------+---------+
+9 rows in set (0.00 sec)
+
+9.Display the dept name which is having maximum employees.?
+
+mysql> select max(desti) from emp_details ;
++------------+
+| max(desti) |
++------------+
+| tester     |
++------------+
+1 row in set (0.00 sec)
+
+10.Write a query to find the empno, ename, job, deptno, dname and loc of all the employees. 
+Include the departments which is having no employees and the employees who had not been allocated any dept.
+
+mysql> select e.emp_id,e.emp_name,e.desti,d.location from emp_details e left join dept_details d on e.dept_no = d.dept_no;
++--------+----------+-----------+------------+
+| emp_id | emp_name | desti     | location   |
++--------+----------+-----------+------------+
+|    101 | Sanjay   | developer | dallas     |
+|    102 | Sarun    | manager   | coimbatore |
+|    103 | santhosh | developer | coimbatore |
+|    104 | sabari   | analyst   | banglore   |
+|    105 | samu     | analyst   | banglore   |
+|    106 | mahesh   | tester    | dallas     |
+|    107 | hari     | designer  | dallas     |
+|    108 | null     | designer  | NULL       |
+|    109 | null     | analyst   | NULL       |
++--------+----------+-----------+------------+
+9 rows in set (0.00 sec)

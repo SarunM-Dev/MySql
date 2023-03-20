@@ -1,0 +1,120 @@
+1.Get all the details of product that belong to "clothing" category an price less than 700?
+
+mysql> select *from department where category='Clothing' and price<=700;
++--------------+----------+-------+---------+--------+
+| name         | category | price | brand   | rating |
++--------------+----------+-------+---------+--------+
+| white cotton | clothing |   600 | addidas |      5 |
++--------------+----------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+2.Get all the details of product that belong to "denim brand with rating greater than 4?
+
+mysql> select *from department where brand='Denim' and rating>4.0;
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| black jeans | clothing |   700 | Denim |    4.2 |
+| white jeans | clothing |   800 | Denim |    4.1 |
++-------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+3.Get all the best rated product with price less than or equal to 1000.Note:assueme that the product with 
+ratimg greater than 4.0 as best rated product.
+
+mysql> select *from department where price<=1000 and rating>4.0;
++--------------+----------+-------+---------+--------+
+| name         | category | price | brand   | rating |
++--------------+----------+-------+---------+--------+
+| Black shirt  | Clothing |   900 | Puma    |    4.8 |
+| Black shirt  | Clothing |   900 | Puma    |    4.8 |
+| black jeans  | clothing |  1000 | addidas |      5 |
+| white cotton | clothing |   600 | addidas |      5 |
+| Bourbon With | biskets  |   100 | bourban |    4.7 |
+| chips        | snacks   |    80 | indian  |    4.1 |
+| harborn      | food     |   300 | visket  |    4.8 |
+| black jeans  | clothing |   700 | Denim   |    4.2 |
+| white jeans  | clothing |   800 | Denim   |    4.1 |
++--------------+----------+-------+---------+--------+
+9 rows in set (0.00 sec)
+
+
+4.Get all the product from the product table whose?
+
+mysql> select *from department where price<=1000 and rating>3.6 and brand='puma';
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| grey jeans  | clothing |   800 | puma  |      4 |
++-------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+5.Get all the product from"puma","denim" or "nike" brands?
+
+mysql> select *from department where brand in('puma','nike','denim');
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| grey jeans  | clothing |   800 | puma  |      4 |
+| black jeans | clothing |   700 | Denim |    4.2 |
+| white jeans | clothing |   800 | Denim |    4.1 |
+| shoe        | model    |   500 | nike  |    4.7 |
++-------------+----------+-------+-------+--------+
+6 rows in set (0.00 sec)
+
+6.Get the details brand is "redmi" with rating greater than 4 or , product 
+that belong to "one plus brand.
+
+mysql> select *from department where brand like 'redmi' and rating>4 or brand like 'one plus';
++--------+----------+-------+----------+--------+
+| name   | category | price | brand    | rating |
++--------+----------+-------+----------+--------+
+| note7  | mobiles  |  5000 | redmi    |    4.7 |
+| plus5t | mobiles  |  4000 | one plus |    3.8 |
++--------+----------+-------+----------+--------+
+2 rows in set (0.00 sec)
+
+7.Get only cakes from "cadbury" and "britannia" brand have rating greater than 4.0.
+Note:that have "cake" name as cakes?
+
+mysql> select *from department where brand in ('britannia','cadburry') and rating>4.0;
++---------+----------+-------+-----------+--------+
+| name    | category | price | brand     | rating |
++---------+----------+-------+-----------+--------+
+| cake    | snacks   |    90 | cadburry  |    4.7 |
+| cake    | snacks   |    80 | britannia |    4.8 |
++---------+----------+-------+-----------+--------+
+4 rows in set (0.00 sec)
+
+8.Get all the details of product dfrom product table , brand is puma and rating greater than 3.5
+or brand is denim and rating greater than 4.0?
+
+mysql> select *from department where brand='puma' and rating>3.5 or brand='denim' and rating>4.0;
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
+| grey jeans  | clothing |   800 | puma  |      4 |
+| black jeans | clothing |   700 | Denim |    4.2 |
+| white jeans | clothing |   800 | Denim |    4.1 |
++-------------+----------+-------+-------+--------+
+5 rows in set (0.00 sec)
+
+9.Get all the shirts avaliable in "puma,"nike"orLevis" brands,excluding the black colour shirts
+
+mysql> select *from department where brand in ('puma','nike','levis') or name like '%black';
++-------------+-----------+-------+-------+--------+
+| name        | category  | price | brand | rating |
++-------------+-----------+-------+-------+--------+
+| Black shirt | Clothing  |   900 | Puma  |    4.8 |
+| Black shirt | Clothing  |   900 | Puma  |    4.8 |
+| grey jeans  | clothing  |   800 | puma  |      4 |
+| shoe        | model     |   500 | nike  |    4.7 |
+| denim shirt | Clothings |   800 | levis |      4 |
++-------------+-----------+-------+-------+--------+
+5 rows in set (0.00 sec)

@@ -1,0 +1,85 @@
+1.GET all details of product from the "puma" brand.
+mysql> select *from department;
++-------------+----------+-------+-------+--------+
+| name        | category | price | brand | rating |
++-------------+----------+-------+-------+--------+
+| Black shirt | Clothing |   900 | Puma  |    4.8 |
++-------------+----------+-------+-------+--------+
+1 row in set (0.00 sec)
+
+
+2.user would like to shop for "jeans" a common patter i all the jeans prodcuts is 
+that their name end swith "jeans",help th user get the details of required product
+mysql> select *from department where name like '%jeans';
++-------------+----------+-------+---------+--------+
+| name        | category | price | brand   | rating |
++-------------+----------+-------+---------+--------+
+| black jeans | clothing |  1000 | addidas |      5 |
+| grey jeans  | clothing |   800 | puma    |      4 |
++-------------+----------+-------+---------+--------+
+2 rows in set (0.00 sec)
+
+
+3.user wants to purchase "bourban small","bourban with" or product from bourban.retrive all details
+od of such products accordingly.
+mysql> select *from department where name like 'bourban%';
++---------------+----------+-------+---------+--------+
+| name          | category | price | brand   | rating |
++---------------+----------+-------+---------+--------+
+| bourban small | biskets  |    50 | bourban |      3 |
++---------------+----------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+
+4.list all the "chips" in the database. Note:consider the product that have"chips in the name
+mysql> select *from department where name='chips';
++-------+----------+-------+--------+--------+
+| name  | category | price | brand  | rating |
++-------+----------+-------+--------+--------+
+| chips | snacks   |    80 | indian |    4.1 |
++-------+----------+-------+--------+--------+
+1 row in set (0.00 sec)
+
+
+5.Get the product whose name matches the fellowing pattren .our of the last 4char
+first char is "h" and third char is "r".
+mysql> select *from department where name like 'h_r_%';
++---------+----------+-------+--------+--------+
+| name    | category | price | brand  | rating |
++---------+----------+-------+--------+--------+
+| harborn | food     |   300 | visket |    4.8 |
++---------+----------+-------+--------+--------+
+1 row in set (0.00 sec)
+
+
+6.Get all the product whose price is less than or equal to 1000?
+mysql> select *from department where price<=1000;
++---------------+----------+-------+---------+--------+
+| name          | category | price | brand   | rating |
++---------------+----------+-------+---------+--------+
+| Black shirt   | Clothing |   900 | Puma    |    4.8 |
+| Black shirt   | Clothing |   900 | Puma    |    4.8 |
+| black jeans   | clothing |  1000 | addidas |      5 |
+| grey jeans    | clothing |   800 | puma    |      4 |
+| white cotton  | clothing |   600 | addidas |      5 |
+| Bourbon With  | biskets  |   100 | bourban |    4.7 |
+| bourban small | biskets  |    50 | bourban |      3 |
+| chips         | snacks   |    80 | indian  |    4.1 |
+| harborn       | food     |   300 | visket  |    4.8 |
++---------------+----------+-------+---------+--------+
+9 rows in set (0.00 sec)
+
+7.Get all the best rated product Note:product whose rating is above 4.0 are considered as best rated?
+mysql> select *from department where rating >4.0;
++--------------+----------+-------+---------+--------+
+| name         | category | price | brand   | rating |
++--------------+----------+-------+---------+--------+
+| Black shirt  | Clothing |   900 | Puma    |    4.8 |
+| Black shirt  | Clothing |   900 | Puma    |    4.8 |
+| black jeans  | clothing |  1000 | addidas |      5 |
+| white cotton | clothing |   600 | addidas |      5 |
+| Bourbon With | biskets  |   100 | bourban |    4.7 |
+| chips        | snacks   |    80 | indian  |    4.1 |
+| harborn      | food     |   300 | visket  |    4.8 |
++--------------+----------+-------+---------+--------+
+7 rows in set (0.00 sec)
